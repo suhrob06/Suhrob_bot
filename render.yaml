@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: freelance-bot
+    env: python
+    plan: free
+    buildCommand: ""
+    startCommand: python bot.py
+    envVars:
+      - key: BOT_TOKEN
+        value: 7861050830:AAFeCj6bQeydMNUfLK8UzS5rqw8G0xMLY-4
+      - key: ADMIN_CHAT_ID
+        value: 7115571058
