@@ -41,7 +41,12 @@ async def projects_handler(callback: CallbackQuery):
         "3️⃣ Автоматизатсияи бизнес ва дигар скриптҳои муфид\n\n"
         "📞 Агар хоҳӣ бо ман тамос гирӣ, дар меню тугмаи «Контакт»-ро пахш кун."
     )
-    await callback.message.answer(projects_text, reply_markup=main_menu, parse_mode="HTML", disable_web_page_preview=True)
+    await callback.message.answer(
+        projects_text,
+        reply_markup=main_menu,
+        parse_mode="HTML",
+        disable_web_page_preview=True
+    )
     await callback.answer()
 
 # Contact menu handler
@@ -64,10 +69,16 @@ async def process_user_message(message: Message, state: FSMContext):
     username = message.from_user.username or "Неизвестен"
 
     # Sending user's message to admin
-    await message.bot.send_message(
-        ADMIN_CHAT_ID,
-        f"📩 Паёми нав аз @{username} ({user_name}):\n\n{user_message}"
-    )
+    try:
+        await message.bot.send_message(
+            ADMIN_CHAT_ID,
+            f"📩 Паёми нав аз @{username} ({user_name}):\n\n{user_message}"
+        )
+    except Exception as e:
+        # Агар паём ба админ наравад, хатогиро лог кун ва ба корбар хабар деҳ
+        await message.answer("Мушкилот дар ирсоли паём ба админ. Лутфан баъдтар кӯшиш кунед.")
+        await state.clear()
+        return
 
     # Replying to user
     await message.answer("✅ Паёматон бо муваффақият ирсол шуд! Ба зудӣ ҷавоб хоҳам дод 🙌")

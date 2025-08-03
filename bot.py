@@ -1,8 +1,14 @@
 import asyncio
+import os
 from aiogram import Bot, Dispatcher
 from aiogram.fsm.storage.memory import MemoryStorage
 from handlers import router
-from config import BOT_TOKEN
+from dotenv import load_dotenv
+
+# Бор кардани тағирёбандаҳои муҳитӣ аз файли .env
+load_dotenv()
+
+BOT_TOKEN = os.getenv("BOT_TOKEN")
 
 async def main():
     bot = Bot(token=BOT_TOKEN)

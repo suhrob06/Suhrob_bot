@@ -1,2 +1,7 @@
-BOT_TOKEN = "7861050830:AAFX60yehP7Daz6FzNePtWbJWzP05rJykRE"
-ADMIN_CHAT_ID = 7115571058  # Инро бо chat_id-и худат иваз кун
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+BOT_TOKEN = os.getenv("BOT_TOKEN")
+ADMIN_CHAT_ID = int(os.getenv("ADMIN_CHAT_ID"))
